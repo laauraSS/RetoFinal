@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-    postgres:
-      image: postgres:latest
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: mypassword
-        POSTGRES_DB: mydatabase
-      ports:
-        - 5432:5432
-      volumes:
-        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: mydatabase
+        ports:
+          - 5432:5432
+        volumes:
+          - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 
     steps:
