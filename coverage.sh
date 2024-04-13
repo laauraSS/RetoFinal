@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FLASK_ENV=development DATABASE_URI=postgresql://postgres:mypassword@localhost:5432
+
 # Ejecutar pruebas con cobertura
 coverage run -m pytest
 

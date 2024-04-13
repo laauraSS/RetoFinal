@@ -14,8 +14,6 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = Config.SQLALCHEMY_DATABASE_URI + "/mydatabase"
-
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -23,8 +21,6 @@ class ProductionConfig(Config):
 
 class TestingConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = Config.SQLALCHEMY_DATABASE_URI + "/testmydatabase"
-    
 
 # Dictionary to map environment names to configuration classes
 config_dict = {
