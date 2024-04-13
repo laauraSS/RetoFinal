@@ -37,7 +37,7 @@ jobs:
     - name: Set environment variables
       run: |
         echo "FLASK_ENV=development" >> $GITHUB_ENV
-        echo "DATABASE_URI=postgresql://postgres:mypassword@postgres:5432/postgres" >> $GITHUB_ENV
+        echo "DATABASE_URI=postgresql://postgres:mypassword@localhost:5432/postgres" >> $GITHUB_ENV
 
     - name: Run tests
       run: pytest
