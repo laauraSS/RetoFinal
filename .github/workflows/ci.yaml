@@ -9,18 +9,6 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
-    services:
-      # Name your Postgres service (e.g., postgresdb)
-      postgresdb:
-        image: postgres
-        # Define environment variables for your Postgres container (optional)
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: mypassword
-          # ... other Postgres environment variables
-        ports:
-          - 5432:5432  # Map container port 5432 to runner port 5432
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -38,8 +26,7 @@ jobs:
     - name: Set environment variables
       run: |
         echo "FLASK_ENV=development" >> $GITHUB_ENV
-        # Use the container hostname for database connection
-        echo "DATABASE_URI=postgresql://postgres:mypassword@postgresdb:5432" >> $GITHUB_ENV
+        echo "DATABASE_URI=postgresql://postgres:mypassword@localhost:5432" >> $GITHUB_ENV
 
     - name: Run tests
       run: pytest
