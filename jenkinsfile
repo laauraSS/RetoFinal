@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Ejecución de tests') {
             steps {
-                sh 'python -m pytest tests/'
+                sh 'python3 -m pytest tests/'
             }
         }
         stage('Linting con flake8') {
