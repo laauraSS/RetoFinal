@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    environment {
+        PATH = "$HOME/.local/bin:$PATH"
+    }
     
     stages {
         stage('Clonado de código fuente') {
