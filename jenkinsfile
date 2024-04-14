@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         PATH = "$HOME/.local/bin:$PATH"
+        
     }
     
     stages {
@@ -13,6 +14,7 @@ pipeline {
         }
         stage('Ejecución de tests') {
             steps {
+                echo $PATH
                 sh 'python3 -m pytest tests/'
             }
         }
