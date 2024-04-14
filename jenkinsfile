@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonado de código fuente') {
             steps {
-                git 'https://github.com/laauraSS/RetoFinal.git'
+                git branch: 'develop', url: 'https://github.com/laauraSS/RetoFinal.git'
             }
         }
         stage('Ejecución de tests') {
