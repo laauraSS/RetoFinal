@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Ejecución de tests') {
             steps {
-                echo $PATH
+                sh 'echo "Ruta: $PATH"'
                 sh 'python3 -m pytest tests/'
             }
         }
