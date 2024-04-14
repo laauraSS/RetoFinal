@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Clonado de código fuente') {
+            steps {
+                git 'https://github.com/laauraSS/RetoFinal.git'
+            }
+        }
+        stage('Ejecución de tests') {
+            steps {
+                sh 'python -m pytest tests/'
+            }
+        }
+        stage('Linting con flake8') {
+            steps {
+                sh 'pip install flake8'
+                sh 'flake8 .'
+            }
+        }
+        stage('Creación de imagen Docker') {
+            steps {
+                script {
+                    docker.build('laurasastre/retofinal:1.0.0', '.')
+                }
+            }
+        }
+        stage('Subida del resultado al Registry') {
+            when {
+                anyOf {
+                    branch 'develop'
+                    branch 'master'
+                    branch 'main'
+                }
+            }
+            steps {
+                script {
+                    docker.image('laurasastre/retofinal:1.0.0').push()
+                }
+            }
+        }
+    }
+}
