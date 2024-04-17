@@ -9,6 +9,7 @@ sys.path.append(app_dir)
 from app import create_app, db
 from app.models import Data
 
+
 class TestModels(unittest.TestCase):
 
     def setUp(self):
@@ -25,10 +26,11 @@ class TestModels(unittest.TestCase):
             data = Data(name="test")
             db.session.add(data)
             db.session.commit()
-            # Verificar si el objeto se ha guardado correctamente en la base de datos
+            # Verificar si el objeto se ha guardado en la base de datos
             retrieved_data = Data.query.filter_by(name="test").first()
             self.assertIsNotNone(retrieved_data)
             self.assertEqual(retrieved_data.name, "test")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,21 +1,29 @@
 pipeline {
     agent any
-
+    
     environment {
         PATH = "$HOME/.local/bin:$PATH"
-        
+        FLASK_ENV="development"
+        DATABASE_URI="postgresql://postgres:mypassword@localhost:5432/mydatabase"
     }
-    
+
     stages {
         stage('Clonado de código fuente') {
             steps {
                 git branch: 'main', url: 'https://github.com/laauraSS/RetoFinal.git'
             }
         }
+
+        stage('Instalación de dependencias') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
         stage('Ejecución de tests') {
             steps {
-                sh 'echo "Ruta: $PATH"'
-                sh 'python3 -m pytest tests/'
+               
+                sh 'pytest tests/'
             }
         }
         stage('Linting con flake8') {

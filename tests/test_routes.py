@@ -3,11 +3,12 @@ import sys
 import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-app_dir = os.path.join(current_dir, '..')  
+app_dir = os.path.join(current_dir, '..')
 sys.path.append(app_dir)
 
 from app import create_app, db
 from app.models import Data
+
 
 class TestRoutes(unittest.TestCase):
 
@@ -46,10 +47,8 @@ class TestRoutes(unittest.TestCase):
             response = self.client.delete(f'/data/{data.id}')
             self.assertEqual(response.status_code, 200)
             deleted_data = db.session.get(Data, data.id)
-            
             self.assertIsNone(deleted_data)
 
 
 if __name__ == '__main__':
     unittest.main()
-
