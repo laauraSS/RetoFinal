@@ -6,6 +6,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 app_dir = os.path.join(current_dir, '..')
 sys.path.append(app_dir)
 
+# flake8: noqa: E402
 from app import create_app, db
 from app.models import Data
 
