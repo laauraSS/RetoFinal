@@ -42,7 +42,7 @@ pipeline {
         stage('Subida del resultado al Registry') {
             when {
                 anyOf {
-                    branch 'develop'
+                    branch 'develo'
                     branch 'master'
                     branch 'main'
                 }
