@@ -1,0 +1,44 @@
+Levantar base de datos con docker:
+    1- docker pull postgres
+    2- docker run --name mi_postgres_container -e POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
+    3- docker exec -it mi_postgres_container psql -U postgres -d postgres
+    4- CREATE TABLE mydatabase
+
+Para inicializar el servidor:
+    Para ambos pasos tener en cuenta varibales de entorno "FLASK_ENV" (entorno que se quiere) y "DATABASE_URI" (url a la base de datos creada anteriormente)
+    Se puede utilizar el archivo manage.sh
+    - Crear tablas de la base de datos ejecutar manage.py
+    - Inicializar la aplicación flask -> ejecutar run.py
+
+Una vez inicializado ya podemos lanzar las peticiones, por ejemplo:
+    -Insertar dato: curl -X POST -H "Content-Type: application/json" -d '{"name": "Nuevo dato"}' http://localhost:5000/data
+                    cmd: curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"Nuevo dato\"}" http://localhost:5000/data
+
+    -Obtener datos: curl http://localhost:5000/data
+    -Eliminar datos (id=1): curl -X DELETE http://localhost:5000/data/1
+
+Ejecución de pruebas unitarias:
+    Ejecutar los archivos test_models.py y test_routes.py dentro de la carpeta tests
+
+Prueba de cobertura
+    Lanzar comando coverage report -m (pasar variables de entorno)
+
+
+En caso de que se necesite, exite un docker-compose para generar un entorno local, el cual lanza dos contenedores, el de la aplicación y el de la base de datos
+    Para ejecutarlo usar "docker-compose up"
+
+
+JENKINSFILE
+    -Configuración jenkins:
+        1. Instalar Jenkins.
+        2. Crear un nuevo trabajo de pipeline: seleccionar la opción "Pipeline script from SCM" para que Jenkins obtenga automáticamente el Jenkinsfile desde el repositorio de código.
+        3. Configurar la ubicación del repositorio: Proporciona la URL del repositorio Git que contiene el Jenkinsfile y especifica la rama principal (main) en la configuración del trabajo.
+        4. Ejecutar el trabajo
+    -Descripción del jenkinfile:
+        - Clonado de código fuente: Esta etapa clona el repositorio de código fuente desde GitHub, utilizando la rama principal (main).
+        - Instalación de dependencias: En esta etapa, se instalan las dependencias de la aplicación Flask especificadas en el archivo requirements.txt utilizando pip.
+        - Ejecución de pruebas: Aquí se ejecutan las pruebas automatizadas de la aplicación utilizando pytest.
+        - Linting con flake8: Se realiza un análisis estático del código utilizando flake8.
+        - Creación de imagen Docker: En esta etapa, se construye una imagen Docker para la aplicación utilizando el archivo Dockerfile en el directorio actual.
+        - Subida del resultado al Registry: Finalmente, si se está realizando un push en las ramas main, master o develop, la imagen Docker creada se sube al registry para su posterior despliegue.
+
